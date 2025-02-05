@@ -59,3 +59,17 @@ print_r([
     'z' => $GLOBALS['z'] ?? 'No definido'
 ]);
 echo "</pre>";
+
+// Ejercicio 5: Conversión de tipos
+echo "<h2>Ejercicio 5: Conversión de tipos</h2>";
+$a = "7 personas"; 
+$b = (int) $a; // $b será 7
+$a = "9E3"; // Notación científica
+$c = (double) $a; // $c será 9000
+echo "<pre>";
+print_r([
+    'a' => $a,
+    'b' => $b,
+    'c' => $c
+]);
+echo "</pre>";
