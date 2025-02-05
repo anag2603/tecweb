@@ -47,3 +47,15 @@ print_r([
     'z' => $z  // $z[0] es "MySQL"
 ]);
 echo "</pre>";
+
+// Ejercicio 4: Acceso con \$GLOBALS
+echo "<h2>Ejercicio 4: Acceso con \$GLOBALS</h2>";
+echo "<h3>Valores de las variables en \$GLOBALS:</h3>";
+echo "<pre>";
+print_r([
+    'a' => $GLOBALS['a'] ?? 'No definido',
+    'b' => $GLOBALS['b'] ?? 'No definido',
+    'c' => $GLOBALS['c'] ?? 'No definido',
+    'z' => $GLOBALS['z'] ?? 'No definido'
+]);
+echo "</pre>";
