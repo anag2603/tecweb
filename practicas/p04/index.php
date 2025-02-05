@@ -29,3 +29,21 @@ $b = &$a;
 echo "<p>Valores después de reasignación:</p>";
 echo "a: $a, b: $b, c: $c<br>";
 echo "<p>Explicación: \$b y \$c ahora apuntan a \$a debido a las referencias.</p>";
+
+// Ejercicio 3: Evolución de variables
+echo "<h2>Ejercicio 3: Evolución de variables</h2>";
+$a = "PHP5"; 
+$z[] = &$a; 
+$b = "5a version de PHP"; 
+$c = (int) $b * 10; // El valor de $c será 50 * 10 = 500
+$a .= $b; // $a ahora es "PHP55a version de PHP"
+$b = $c;  // $b toma el valor 500
+$z[0] = "MySQL"; // Cambia indirectamente el valor de $a debido a la referencia
+echo "<pre>";
+print_r([
+    'a' => $a, // Ahora $a es "MySQL"
+    'b' => $b, // $b es 500
+    'c' => $c, // $c es 500
+    'z' => $z  // $z[0] es "MySQL"
+]);
+echo "</pre>";
