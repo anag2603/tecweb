@@ -73,3 +73,19 @@ print_r([
     'c' => $c
 ]);
 echo "</pre>";
+
+// Ejercicio 6: Valores booleanos
+echo "<h2>Ejercicio 6: Valores booleanos</h2>";
+$a = "0";
+$b = "TRUE";
+$c = FALSE;
+$d = ($a or $b); 
+$e = ($a and $c); 
+$f = ($a xor $b);
+
+echo "<p>Resultados con var_dump:</p>";
+var_dump($a, $b, $c, $d, $e, $f);
+
+echo "<p>Transformación a valores visibles:</p>";
+echo "c: " . ($c ? 'true' : 'false') . "<br>";
+echo "e: " . ($e ? 'true' : 'false') . "<br>";
