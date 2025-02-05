@@ -89,3 +89,13 @@ var_dump($a, $b, $c, $d, $e, $f);
 echo "<p>Transformación a valores visibles:</p>";
 echo "c: " . ($c ? 'true' : 'false') . "<br>";
 echo "e: " . ($e ? 'true' : 'false') . "<br>";
+
+// Ejercicio 7: Información del servidor
+echo "<h2>Ejercicio 7: Información del servidor</h2>";
+echo "<ul>";
+echo "<li>Versión de Apache y PHP: " . ($_SERVER['SERVER_SOFTWARE'] ?? 'No disponible') . "</li>";
+echo "<li>Nombre del sistema operativo del servidor: " . PHP_OS . "</li>";
+echo "<li>Idioma del navegador: " . ($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'No disponible') . "</li>";
+echo "</ul>";
+
+?>
