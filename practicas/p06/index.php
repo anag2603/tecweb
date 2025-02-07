@@ -120,5 +120,30 @@ if (isset($_GET['numero'])) {
     }
     ?>
 
+<h1>Ejercicio 6: Parque Vehicular</h1>
+    <h2>Consulta de Vehículos</h2>
+    <form method="post">
+        <label for="matricula">Matrícula:</label>
+        <input type="text" name="matricula" id="matricula"><br>
+        <button type="submit">Buscar Vehículo</button>
+    </form>
+
+    <?php
+    $parqueVehicular = obtenerParqueVehicular();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['matricula'])) {
+        $matricula = $_POST['matricula'];
+        if (isset($parqueVehicular[$matricula])) {
+            echo '<h3>Datos del Vehículo:</h3>';
+            echo '<pre>' . print_r($parqueVehicular[$matricula], true) . '</pre>';
+        } else {
+            echo '<p>No se encontró un vehículo con esa matrícula.</p>';
+        }
+    }
+
+    echo '<h3>Todos los Vehículos:</h3>';
+    echo '<pre>' . print_r($parqueVehicular, true) . '</pre>';
+    ?>
+
 </body>
 </html>
