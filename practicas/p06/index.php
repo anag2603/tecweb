@@ -6,8 +6,8 @@
     <title>Práctica 6</title>
 </head>
 <body>
-<h1>Ejercicio 1: Comprobación de múltiplo de 5 y 7</h1>
 
+<h1>Ejercicio 1: Comprobación de múltiplo de 5 y 7</h1>
 <p>Introduce un número en la URL como parámetro usando <code>?numero=valor</code>. Por ejemplo: <code>index.php?numero=35</code></p>
 
 <?php
@@ -27,6 +27,24 @@ if (isset($_GET['numero'])) {
     }
 }
 ?>
+
+<h1>Ejercicio 2: Generación de Secuencia Impar-Par-Impar</h1>
+
+    <?php
+    $resultado = generarSecuenciaImparParImpar();
+
+    echo '<p>Números generados: ' . $resultado['numerosGenerados'] . '</p>';
+    echo '<p>Iteraciones realizadas: ' . $resultado['iteraciones'] . '</p>';
+    echo '<table border="1">';
+    foreach ($resultado['matriz'] as $fila) {
+        echo '<tr>';
+        foreach ($fila as $numero) {
+            echo '<td>' . $numero . '</td>';
+        }
+        echo '</tr>';
+    }
+    echo '</table>';
+    ?>
 
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p04/index.php" method="post">
