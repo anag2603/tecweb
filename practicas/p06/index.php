@@ -86,6 +86,18 @@ if (isset($_GET['numero'])) {
         }
     }
     ?>
-    
+
+<h1>Ejercicio 4: Arreglo ASCII de letras</h1>
+    <?php
+    $arregloAscii = crearArregloAscii();
+    echo '<table border="1">';
+    echo '<tr><th>Indice</th><th>Valor</th></tr>';
+    foreach ($arregloAscii as $indice => $valor) {
+        echo "<tr><td>$indice</td><td>$valor</td></tr>";
+    }
+    echo '</table>';
+    ?>
+</body>
+
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 <?php
 function esMultiploDe5y7($numero) {
     return $numero % 5 === 0 && $numero % 7 === 0;
@@ -46,5 +45,13 @@ function encontrarMultiploConDoWhile($multiploDe) {
     } while ($num % $multiploDe !== 0);
     return $num;
 }
-?>
 
+function crearArregloAscii() {
+    $arreglo = [];
+    for ($i = 97; $i <= 122; $i++) {
+        $arreglo[$i] = chr($i);
+    }
+    return $arreglo;
+}
+
+?>
