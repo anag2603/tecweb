@@ -97,7 +97,28 @@ if (isset($_GET['numero'])) {
     }
     echo '</table>';
     ?>
-</body>
+
+<h1>Ejercicio 5: Validación de Edad y Sexo</h1>
+    <form method="post">
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" id="edad" required><br>
+        
+        <label for="sexo">Sexo:</label>
+        <select name="sexo" id="sexo" required>
+            <option value="femenino">Femenino</option>
+            <option value="masculino">Masculino</option>
+        </select><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $edad = $_POST['edad'];
+        $sexo = $_POST['sexo'];
+        echo '<h3>' . validarEdadSexo($edad, $sexo) . '</h3>';
+    }
+    ?>
 
 </body>
 </html>

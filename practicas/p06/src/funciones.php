@@ -54,4 +54,31 @@ function crearArregloAscii() {
     return $arreglo;
 }
 
+function validarEdadSexo($edad, $sexo) {
+    if ($sexo === 'femenino' && $edad >= 18 && $edad <= 35) {
+        return "Bienvenida, usted está en el rango de edad permitido.";
+    } else {
+        return "Lo sentimos, no cumple con los requisitos.";
+    }
+}
+
+function obtenerParqueVehicular() {
+    return [
+        "ABC1234" => [
+            "Auto" => ["marca" => "Toyota", "modelo" => 2020, "tipo" => "sedan"],
+            "Propietario" => ["nombre" => "Juan Perez", "ciudad" => "Puebla", "direccion" => "Av. Reforma 123"]
+        ],
+        "DEF5678" => [
+            "Auto" => ["marca" => "Honda", "modelo" => 2019, "tipo" => "hatchback"],
+            "Propietario" => ["nombre" => "Maria Lopez", "ciudad" => "Monterrey", "direccion" => "Calle Juarez 45"]
+        ],
+        // ... Agrega 13 registros adicionales
+        "XYZ9876" => [
+            "Auto" => ["marca" => "Mazda", "modelo" => 2021, "tipo" => "camioneta"],
+            "Propietario" => ["nombre" => "Carlos Sanchez", "ciudad" => "Guadalajara", "direccion" => "Boulevard Hidalgo 99"]
+        ]
+    ];
+}
 ?>
+
+
