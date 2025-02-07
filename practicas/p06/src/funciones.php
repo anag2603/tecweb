@@ -1,3 +1,4 @@
+
 <?php
 function esMultiploDe5y7($numero) {
     return $numero % 5 === 0 && $numero % 7 === 0;
@@ -30,4 +31,20 @@ function generarSecuenciaImparParImpar() {
         'numerosGenerados' => $numerosGenerados
     ];
 }
+
+function encontrarMultiploConWhile($multiploDe) {
+    $num = rand(1, 1000);
+    while ($num % $multiploDe !== 0) {
+        $num = rand(1, 1000);
+    }
+    return $num;
+}
+
+function encontrarMultiploConDoWhile($multiploDe) {
+    do {
+        $num = rand(1, 1000);
+    } while ($num % $multiploDe !== 0);
+    return $num;
+}
 ?>
+

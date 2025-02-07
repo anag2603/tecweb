@@ -61,5 +61,31 @@ if (isset($_GET['numero'])) {
             echo $_POST["email"];
         }
     ?>
+
+<h1>Ejercicio 3: Encontrar múltiplo aleatorio</h1>
+
+    <h2>Con ciclo while</h2>
+    <?php
+    if (isset($_GET['multiplo'])) {
+        $multiploDe = $_GET['multiplo'];
+        if (is_numeric($multiploDe) && $multiploDe > 0) {
+            $resultadoWhile = encontrarMultiploConWhile($multiploDe);
+            echo "<p>El primer múltiplo de $multiploDe encontrado con while es: $resultadoWhile</p>";
+        } else {
+            echo '<p>Por favor ingresa un número válido para el múltiplo.</p>';
+        }
+    }
+    ?>
+
+    <h2>Con ciclo do-while</h2>
+    <?php
+    if (isset($_GET['multiplo'])) {
+        if (is_numeric($multiploDe) && $multiploDe > 0) {
+            $resultadoDoWhile = encontrarMultiploConDoWhile($multiploDe);
+            echo "<p>El primer múltiplo de $multiploDe encontrado con do-while es: $resultadoDoWhile</p>";
+        }
+    }
+    ?>
+    
 </body>
 </html>
