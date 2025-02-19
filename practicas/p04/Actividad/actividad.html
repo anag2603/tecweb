@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ejercicios PHP</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<h2>Ejercicio 1: Variables válidas e inválidas</h2><p>En PHP, los nombres de las variables deben cumplir con ciertas reglas. Las siguientes son variables válidas:</p><ul><li>$_myvar: válida, comienza con un guion bajo seguido de letras o números.</li><li>$_7var: válida, comienza con un guion bajo, aunque contiene un número.</li><li>$myvar: válida, comienza con una letra seguida de letras o números.</li><li>$var7: válida, contiene letras y termina en un número.</li><li>$_element1: válida, comienza con guion bajo seguido de letras y números.</li></ul><p>Las siguientes son variables inválidas:</p><ul><li>myvar: inválida porque no tiene signo $ inicial.</li><li>$house*5: inválida porque contiene caracteres especiales (*).</li></ul><h2>Ejercicio 2: Referencias entre variables</h2><p>Valores iniciales:</p><p>a: ManejadorSQL, b: MySQL, c: ManejadorSQL</p><p>Valores después de reasignación:</p><p>a: PHP server, b: PHP server, c: PHP server</p><p>Explicación: $b y $c ahora apuntan a $a debido a las referencias.</p><h2>Ejercicio 3: Evolución de variables</h2><pre>Array
+(
+    [a] => MySQL
+    [b] => MySQL
+    [c] => MySQL
+    [z] => Array
+        (
+            [0] => MySQL
+        )
+
+)
+</pre><h2>Ejercicio 4: Acceso con $GLOBALS</h2><h3>Valores de las variables en $GLOBALS:</h3><pre>Array
+(
+    [a] => MySQL
+    [b] => MySQL
+    [c] => MySQL
+    [z] => Array
+        (
+            [0] => MySQL
+        )
+
+)
+</pre><h2>Ejercicio 5: Conversión de tipos</h2><pre>Array
+(
+    [a] => 9000
+    [b] => 9000
+    [c] => 9000
+)
+</pre><h2>Ejercicio 6: Valores booleanos</h2><p>Resultados con var_dump:</p><p>bool(false)
+bool(false)
+bool(false)
+bool(false)
+bool(false)
+bool(false)
+</p><p>Transformación a valores visibles:</p><p>c: false</p><p>e: false</p><h2>Ejercicio 7: Información del servidor</h2><ul><li>Versión de Apache y PHP: Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12</li><li>Nombre del sistema operativo del servidor: WINNT</li><li>Idioma del navegador: es-ES,es;q=0.9</li></ul> <p>
+    <a href="https://validator.w3.org/markup/check?uri=referer"><img
+    src="https://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" /></a>
+  </p>
+  
+</body>
+</html>
