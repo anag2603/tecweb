@@ -32,6 +32,8 @@
 
     <form id="formularioProductos" action="update_producto.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= htmlspecialchars($producto['id']) ?>">
+        <input type="hidden" name="imagen_actual" value="<?= htmlspecialchars($producto['imagen']) ?>"> <!-- Imagen actual -->
+
         <label>Nombre:</label> <input type="text" name="nombre" value="<?= htmlspecialchars($producto['nombre']) ?>" required maxlength="100"><br>
         <label>Marca:</label> <input type="text" name="marca" value="<?= htmlspecialchars($producto['marca']) ?>" required><br>
         <label>Modelo:</label> <input type="text" name="modelo" value="<?= htmlspecialchars($producto['modelo']) ?>" required maxlength="25"><br>

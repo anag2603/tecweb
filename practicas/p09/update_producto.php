@@ -2,7 +2,7 @@
 // Conexión a la base de datos
 $host = 'localhost';
 $user = 'root';
-$password = 'Cande02022004';
+$password = 'Cande02022004'; 
 $dbname = 'marketzone';
 
 // Crear la conexión
@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Ejecutar la consulta
         if ($stmt->execute()) {
             echo "Producto actualizado exitosamente.";
+            header("Location: get_productos_xhtml_v2.php");  // Redirigir después de actualizar
+            exit;
         } else {
             echo "Error al actualizar el producto: " . $stmt->error;
         }
@@ -57,4 +59,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->close();
 }
 ?>
-
