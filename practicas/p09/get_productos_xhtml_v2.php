@@ -11,7 +11,7 @@
     }
 
     if (!empty($tope)) {
-        @$link = new mysqli('localhost', 'root', '12345678a', 'marketzone');
+        @$link = new mysqli('localhost', 'root', 'Cande02022004', 'marketzone');
         if ($link->connect_errno) {
             die('Falló la conexión: '.$link->connect_error.'<br/>');
         }
