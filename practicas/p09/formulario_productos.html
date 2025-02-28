@@ -4,28 +4,94 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario Productos</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("formularioProductos").addEventListener("submit", function(event) {
+                let valid = true;
+
+                // Nombre (Requerido, <=100 caracteres)
+                let nombre = document.getElementById("form-name").value.trim();
+                if (nombre === "" || nombre.length > 100) {
+                    alert("El nombre es requerido y debe tener 100 caracteres o menos.");
+                    valid = false;
+                }
+
+                // Marca (Requerido, seleccionada de una lista)
+                let marca = document.getElementById("form-marca").value.trim();
+                if (marca === "") {
+                    alert("Debe seleccionar una marca.");
+                    valid = false;
+                }
+
+                // Modelo (Requerido, alfanumérico, <=25 caracteres)
+                let modelo = document.getElementById("form-modelo").value.trim();
+                if (!/^[a-zA-Z0-9 ]{1,25}$/.test(modelo)) {
+                    alert("El modelo es requerido, debe ser alfanumérico y tener 25 caracteres o menos.");
+                    valid = false;
+                }
+
+                // Precio (Requerido, >99.99)
+                let precio = parseFloat(document.getElementById("form-precio").value);
+                if (isNaN(precio) || precio <= 99.99) {
+                    alert("El precio es requerido y debe ser mayor a 99.99.");
+                    valid = false;
+                }
+
+                // Detalles (Opcional, <=250 caracteres)
+                let detalles = document.getElementById("form-detalles").value.trim();
+                if (detalles.length > 250) {
+                    alert("Los detalles no deben superar los 250 caracteres.");
+                    valid = false;
+                }
+
+                // Unidades (Requerido, >=0)
+                let unidades = parseInt(document.getElementById("form-unidades").value);
+                if (isNaN(unidades) || unidades < 0) {
+                    alert("Las unidades son requeridas y deben ser 0 o más.");
+                    valid = false;
+                }
+
+                // Imagen (Opcional, pero con valor por defecto si está vacía)
+                let imagen = document.getElementById("form-img");
+                if (imagen.files.length === 0) {
+                    alert("No se seleccionó una imagen, se usará la imagen por defecto.");
+                }
+
+                if (!valid) {
+                    event.preventDefault(); // Evita que el formulario se envíe si hay errores
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <h1>Registro de Productos</h1>
     <p>Ingresa los productos que desees insertar en la base de datos</p>
     <form id="formularioProductos" action="http://localhost/tecweb/practicas/p08/set_producto_v2.php" method="POST" enctype="multipart/form-data">
         <h3>Datos del producto:</h3>
-             <fieldset>
-                <ul>
-                  <li class="lista"><label for="form-name" class="contenedor_lista">Nombre:</label> <input type="text" name="name" id="form-name" placeholder="No más de 100 caracteres"></li>
-                  <li class="lista"><label for="form-marca">Marca:</label> <input type="text" name="marca" id="form-marca" placeholder="No más de 25 caracteres"></li>
-                  <li class="lista"><label for="form-modelo">Modelo:</label> <input type="text" name="modelo" id="form-modelo" placeholder="No más de 25 caracteres"></li>
-                  <li class="lista"><label for="form-precio">Precio:</label> <input type="number" name="precio" id="form-precio"></li>
-                  <li class="lista"><label for="form-detalles">Detalles:</label><br> <textarea name="detalles" id="form-detalles" rows="4" cols="60" placeholder="No más de 250 caracteres"></textarea></li>
-                  <li class="lista"><label for="form-unidades">Unidades:</label> <input type="number" name="unidades" id="form-unidades"></li>
-                  <li class="lista"><label for="form-img">Imagen:</label> <input type="file" name="img" id="form-img"></li>
-                </ul>
-             </fieldset>
-
-              <div class="contenedor_boton">
-                <button type="submit" class="boton">Registrar producto</button>
-              </div>
-             <input type="reset">
+        <fieldset>
+            <ul>
+                <li class="lista"><label for="form-name">Nombre:</label> <input type="text" name="name" id="form-name" placeholder="No más de 100 caracteres" required></li>
+                <li class="lista"><label for="form-marca">Marca:</label> 
+                    <select name="marca" id="form-marca" required>
+                        <option value="">Seleccione una marca</option>
+                        <option value="Gymshark">Gymshark</option>
+                        <option value="Nike">Nike</option>
+                        <option value="Adidas">Adidas</option>
+                        <option value="X10">X10</option>
+                    </select>
+                </li>
+                <li class="lista"><label for="form-modelo">Modelo:</label> <input type="text" name="modelo" id="form-modelo" placeholder="No más de 25 caracteres" required></li>
+                <li class="lista"><label for="form-precio">Precio:</label> <input type="number" step="0.01" name="precio" id="form-precio" required></li>
+                <li class="lista"><label for="form-detalles">Detalles:</label><br> <textarea name="detalles" id="form-detalles" rows="4" cols="60" placeholder="No más de 250 caracteres"></textarea></li>
+                <li class="lista"><label for="form-unidades">Unidades:</label> <input type="number" name="unidades" id="form-unidades" required></li>
+                <li class="lista"><label for="form-img">Imagen:</label> <input type="file" name="img" id="form-img"></li>
+            </ul>
+        </fieldset>
+        <div class="contenedor_boton">
+            <button type="submit" class="boton">Registrar producto</button>
+        </div>
+        <input type="reset">
     </form>
 </body>
 </html>
