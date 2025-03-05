@@ -91,3 +91,38 @@ function init() {
     // SE AGREGARÁ EL EVENTO DE 'input' AL CAMPO DE BÚSQUEDA
     document.getElementById('search').addEventListener('input', buscarProducto);
 }
+
+// FUNCIÓN PARA AGREGAR UN NUEVO PRODUCTO
+function agregarProducto() {
+    const producto = {
+        nombre: document.getElementById('nombre').value,
+        precio: parseFloat(document.getElementById('precio').value),
+        unidades: parseInt(document.getElementById('unidades').value),
+        modelo: document.getElementById('modelo').value,
+        marca: document.getElementById('marca').value,
+        detalles: document.getElementById('detalles').value,
+        imagen: document.getElementById('imagen').value,
+    };
+
+    // Validación de los campos
+    if (!producto.nombre || !producto.marca || !producto.modelo || producto.precio <= 0 || producto.unidades <= 0) {
+        alert('Por favor, complete todos los campos correctamente.');
+        return;
+    }
+
+    // Enviar los datos al servidor
+    fetch('./backend/create.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(producto),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message || data.error);
+    })
+    .catch(error => {
+        alert('Error al agregar producto: ' + error);
+    });
+}
