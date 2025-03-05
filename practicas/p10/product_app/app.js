@@ -8,6 +8,16 @@ var baseJSON = {
     "imagen": "img/default.png"
 };
 
+// SE INICIALIZA EL FORMULARIO CON LOS VALORES BASE
+function init() {
+    // Convierte el JSON a string para poder mostrarlo
+    var JsonString = JSON.stringify(baseJSON, null, 2);
+    document.getElementById("description").value = JsonString;
+
+    // SE AGREGARÁ EL EVENTO DE 'input' AL CAMPO DE BÚSQUEDA
+    document.getElementById('search').addEventListener('input', buscarProducto);
+}
+
 // FUNCIÓN DE BÚSQUEDA DINÁMICA
 function buscarProducto(e) {
     e.preventDefault();
@@ -22,13 +32,13 @@ function buscarProducto(e) {
     client.onreadystatechange = function () {
         // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
         if (client.readyState == 4 && client.status == 200) {
-            console.log('[CLIENTE]\n'+client.responseText);
-            
+            console.log('[CLIENTE]\n' + client.responseText);
+
             // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-            let productos = JSON.parse(client.responseText);    // similar a eval('('+client.responseText+')');
-            
+            let productos = JSON.parse(client.responseText);
+
             // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
-            if(productos.length > 0) {
+            if (productos.length > 0) {
                 let template = '';
                 // SE ITERAN LOS PRODUCTOS Y SE CREAN LAS FILAS
                 productos.forEach(producto => {
@@ -38,7 +48,7 @@ function buscarProducto(e) {
                     descripcion += '<li>modelo: ' + producto.modelo + '</li>';
                     descripcion += '<li>marca: ' + producto.marca + '</li>';
                     descripcion += '<li>detalles: ' + producto.detalles + '</li>';
-                    
+
                     // SE CREA LA PLANTILLA DE LA FILA DEL PRODUCTO
                     template += `
                         <tr>
@@ -48,7 +58,7 @@ function buscarProducto(e) {
                         </tr>
                     `;
                 });
-                
+
                 // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
                 document.getElementById("productos").innerHTML = template;
             } else {
@@ -64,17 +74,17 @@ function buscarProducto(e) {
 function getXMLHttpRequest() {
     var objetoAjax;
 
-    try{
+    try {
         objetoAjax = new XMLHttpRequest();
-    }catch(err1){
-        try{
+    } catch (err1) {
+        try {
             // IE7 y IE8
             objetoAjax = new ActiveXObject("Msxml2.XMLHTTP");
-        }catch(err2){
-            try{
+        } catch (err2) {
+            try {
                 // IE5 y IE6
                 objetoAjax = new ActiveXObject("Microsoft.XMLHTTP");
-            }catch(err3){
+            } catch (err3) {
                 objetoAjax = false;
             }
         }
@@ -82,47 +92,46 @@ function getXMLHttpRequest() {
     return objetoAjax;
 }
 
-// SE INICIALIZA EL FORMULARIO CON LOS VALORES BASE
-function init() {
-    // Convierte el JSON a string para poder mostrarlo
-    var JsonString = JSON.stringify(baseJSON, null, 2);
-    document.getElementById("description").value = JsonString;
-
-    // SE AGREGARÁ EL EVENTO DE 'input' AL CAMPO DE BÚSQUEDA
-    document.getElementById('search').addEventListener('input', buscarProducto);
-}
-
 // FUNCIÓN PARA AGREGAR UN NUEVO PRODUCTO
-function agregarProducto() {
-    const producto = {
-        nombre: document.getElementById('nombre').value,
-        precio: parseFloat(document.getElementById('precio').value),
-        unidades: parseInt(document.getElementById('unidades').value),
-        modelo: document.getElementById('modelo').value,
-        marca: document.getElementById('marca').value,
-        detalles: document.getElementById('detalles').value,
-        imagen: document.getElementById('imagen').value,
-    };
+function agregarProducto(event) {
+    event.preventDefault(); // Prevenir el envío tradicional del formulario
 
-    // Validación de los campos
-    if (!producto.nombre || !producto.marca || !producto.modelo || producto.precio <= 0 || producto.unidades <= 0) {
-        alert('Por favor, complete todos los campos correctamente.');
+    console.log("Formulario enviado"); // Para verificar que se dispara el evento
+
+    // Obtener el valor del campo 'description' que contiene el JSON
+    const description = document.getElementById('description').value;
+
+    // Intentar convertir el JSON del campo description
+    let producto;
+    try {
+        producto = JSON.parse(description); // Convertimos el JSON a un objeto
+    } catch (error) {
+        alert('El JSON ingresado no es válido.');
         return;
     }
 
-    // Enviar los datos al servidor
+    // Actualizamos el objeto producto con los datos del formulario
+    producto.nombre = document.getElementById('name').value; // Nombre del producto
+
+    // Validar que el JSON tenga todos los campos necesarios
+    if (!producto.nombre || producto.precio <= 0 || producto.unidades <= 0 || !producto.modelo || !producto.marca) {
+        alert('Por favor, complete todos los campos correctamente en el JSON.');
+        return;
+    }
+
+    // Enviar los datos del producto al servidor (backend)
     fetch('./backend/create.php', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(producto),
     })
     .then(response => response.json())
     .then(data => {
+        console.log('Respuesta del servidor:', data);
         alert(data.message || data.error);
     })
     .catch(error => {
-        alert('Error al agregar producto: ' + error);
+        console.error('Error en la petición:', error);
+        alert('Error al conectar con el servidor.');
     });
 }

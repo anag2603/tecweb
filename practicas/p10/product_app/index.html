@@ -20,15 +20,15 @@
     <div>
       <div>
         <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
-        <form id="task-form">
+        <form id="task-form" onsubmit="agregarProducto(event)">
           <div>
-            <input type="text" id="name" placeholder="Nombre de producto">
+            <input type="text" id="name" placeholder="Nombre de producto" required>
           </div>
           <div>
             <textarea id="description" cols="30" rows="10" placeholder="JSON de producto"></textarea>
           </div>
           <input type="hidden" id="taskId">
-          <button type="submit" onclick="agregarProducto(event)">
+          <button type="submit">
             Agregar Producto
           </button>
         </form>
