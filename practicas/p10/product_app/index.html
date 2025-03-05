@@ -10,11 +10,11 @@
     <nav>
       <a href="#">Product App</a>
       
-        <ul></ul>
-        <form>
-          <input name="search" id="search" type="search" placeholder="ID">
-          <button type="submit" onclick="buscarID(event)">Buscar</button>
-        </form>
+      <ul></ul>
+      <form>
+        <input name="search" id="search" type="search" placeholder="Buscar producto (por nombre, marca o detalles)">
+        <!-- Eliminar el botón y permitir la búsqueda automática -->
+      </form>
     </nav>
 
     <div>
@@ -28,7 +28,7 @@
             <textarea id="description" cols="30" rows="10" placeholder="JSON de producto"></textarea>
           </div>
           <input type="hidden" id="taskId">
-          <button type="submit" onclick="agregarProducto(event)" >
+          <button type="submit" onclick="agregarProducto(event)">
             Agregar Producto
           </button>
         </form>

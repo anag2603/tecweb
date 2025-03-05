@@ -1,16 +1,25 @@
 <?php
     include_once __DIR__.'/database.php';
 
-    // SE OBTIENE LA INFORMACIÓN DEL PRODUCTO ENVIADA POR EL CLIENTE
-    $producto = file_get_contents('php://input');
-    if(!empty($producto)) {
-        // SE TRANSFORMA EL STRING DEL JASON A OBJETO
-        $jsonOBJ = json_decode($producto);
-        /**
-         * SUSTITUYE LA SIGUIENTE LÍNEA POR EL CÓDIGO QUE REALICE
-         * LA INSERCIÓN A LA BASE DE DATOS. COMO RESPUESTA REGRESA
-         * UN MENSAJE DE ÉXITO O DE ERROR, SEGÚN SEA EL CASO.
-         */
-        echo '[SERVIDOR] Nombre: '.$jsonOBJ->nombre;
+    // OBTENER LOS DATOS DEL PRODUCTO
+    $productoJson = file_get_contents("php://input");
+    $producto = json_decode($productoJson, true);
+
+    if ($producto) {
+        // INSERTAR EL NUEVO PRODUCTO EN LA BASE DE DATOS
+        $query = "INSERT INTO productos (nombre, precio, unidades, modelo, marca, detalles, imagen) 
+                  VALUES ('{$producto['nombre']}', '{$producto['precio']}', '{$producto['unidades']}', 
+                          '{$producto['modelo']}', '{$producto['marca']}', '{$producto['detalles']}', 
+                          '{$producto['imagen']}')";
+
+        if ($conexion->query($query)) {
+            echo json_encode(["message" => "Producto agregado exitosamente."]);
+        } else {
+            echo json_encode(["error" => "Error al agregar producto: " . mysqli_error($conexion)]);
+        }
+    } else {
+        echo json_encode(["error" => "Datos de producto no válidos."]);
     }
+
+    $conexion->close();
 ?>
