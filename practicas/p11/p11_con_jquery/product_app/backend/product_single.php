@@ -1,6 +1,7 @@
 <?php
     include_once __DIR__ . '/database.php'; // Incluir la conexión a la base de datos
 
+    // Ya puedes usar la variable $conexion aquí sin necesidad de comprobar la conexión de nuevo
     if(isset($_POST['id'])) {
         $id = $_POST['id'];
         $query = "SELECT * FROM productos WHERE id = $id;";
