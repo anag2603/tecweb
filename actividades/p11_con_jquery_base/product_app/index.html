@@ -31,13 +31,43 @@
             <div class="card-body">
               <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
               <form id="product-form">
-                <div class="form-group">
-                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto">
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" id="description" cols="30" rows="10" placeholder="JSON de producto"></textarea>
-                </div>
                 <input type="hidden" id="productId">
+
+                <div class="form-group">
+                  <label for="name">Nombre:</label>
+                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="precio">Precio:</label>
+                  <input class="form-control" type="number" id="precio" step="0.01" placeholder="Precio" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="unidades">Unidades:</label>
+                  <input class="form-control" type="number" id="unidades" placeholder="Cantidad en stock" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="modelo">Modelo:</label>
+                  <input class="form-control" type="text" id="modelo" placeholder="Modelo del producto" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="marca">Marca:</label>
+                  <input class="form-control" type="text" id="marca" placeholder="Marca del producto" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="detalles">Detalles:</label>
+                  <textarea class="form-control" id="detalles" rows="3" placeholder="Detalles adicionales"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="imagen">URL de la imagen:</label>
+                  <input class="form-control" type="text" id="imagen" placeholder="URL de la imagen del producto">
+                </div>
+
                 <button class="btn btn-primary btn-block text-center" type="submit">
                   Agregar Producto
                 </button>
@@ -75,5 +105,4 @@
     <!-- Lógica del Frontend -->
     <script src="app.js"></script>
   </body>
-
 </html>
