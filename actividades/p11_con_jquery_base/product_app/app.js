@@ -71,6 +71,7 @@ $(document).ready(function() {
                                 descripcion += '<li>marca: '+producto.marca+'</li>';
                                 descripcion += '<li>detalles: '+producto.detalles+'</li>';
                             
+
                                 template += `
                                     <tr productId="${producto.id}">
                                         <td>${producto.id}</td>
@@ -104,67 +105,64 @@ $(document).ready(function() {
         }
     });
 
-// VALIDAR CAMPOS AL CAMBIAR DE FOCO
-$("#name, #precio, #unidades, #modelo, #marca").blur(function() {
-    validarCampo($(this));
-});
+    // VALIDAR CAMPOS AL CAMBIAR DE FOCO
+    $("#name, #precio, #unidades, #modelo, #marca").blur(function() {
+        validarCampo($(this));
+    });
 
-function validarCampo(elemento) {
-    let valor = elemento.val().trim();
-    let mensaje = "";
+    function validarCampo(elemento) {
+        let valor = elemento.val().trim();
+        let mensaje = "";
 
-    if (valor === "") {
-        mensaje = `El campo ${elemento.attr('id')} es obligatorio.`;
-    } else {
-        switch (elemento.attr('id')) {
-            case 'precio':
-                if (isNaN(valor) || valor <= 0) mensaje = "El Precio debe ser un número mayor que 0.";
-                break;
-            case 'unidades':
-                if (!Number.isInteger(parseInt(valor)) || parseInt(valor) <= 0) mensaje = "Debe ser un número entero mayor que 0.";
-                break;
+        if (valor === "") {
+            mensaje = `El campo ${elemento.attr('id')} es obligatorio.`;
+        } else {
+            switch (elemento.attr('id')) {
+                case 'precio':
+                    if (isNaN(valor) || valor <= 0) mensaje = "El Precio debe ser un número mayor que 0.";
+                    break;
+                case 'unidades':
+                    if (!Number.isInteger(parseInt(valor)) || parseInt(valor) <= 0) mensaje = "Debe ser un número entero mayor que 0.";
+                    break;
+            }
+        }
 
+        mostrarEstado(mensaje, elemento);
+    }
+
+    function mostrarEstado(mensaje, elemento) {
+        let estadoCampo = elemento.next('.status-bar'); // Buscar barra de estado junto al campo
+        // Si no hay barra de estado, la creamos
+        if (!estadoCampo.length && mensaje) {
+            estadoCampo = $('<div class="status-bar" style="color:#ffe18b; font-size:12px;"></div>');
+            elemento.after(estadoCampo);
+        }
+        
+        // Si hay un mensaje, lo mostramos
+        if (mensaje) {
+            estadoCampo.text(mensaje).show(); // Muestra el mensaje
+        } else {
+            estadoCampo.remove(); // Si no hay mensaje, eliminamos la barra
         }
     }
 
-    mostrarEstado(mensaje, elemento);
-}
-
-
-function validarImagen(elemento) {
-    let valor = elemento.val().trim();
-    if (valor === "") {
-        elemento.val("default-image.jpg");
-        mostrarEstado("Se ha asignado una imagen por defecto.", elemento);
+    // VALIDAR IMAGEN
+    function validarImagen(elemento) {
+        let valor = elemento.val().trim();
+        if (valor === "") {
+            elemento.val("default-image.jpg");
+            mostrarEstado("Se ha asignado una imagen por defecto.", elemento);
+        }
     }
-}
 
-$("#imagen").blur(function() {
-    validarImagen($(this));
-});
-
-function mostrarEstado(mensaje, elemento) {
-    let estadoCampo = elemento.next('.status-bar'); // Buscar barra de estado junto al campo
-    // Si no hay barra de estado, la creamos
-    if (!estadoCampo.length && mensaje) {
-        estadoCampo = $('<div class="status-bar" style="color:#ffe18b; font-size:12px;"></div>');
-        elemento.after(estadoCampo);
-    }
-    
-    // Si hay un mensaje, lo mostramos
-    if (mensaje) {
-        estadoCampo.text(mensaje).show(); // Muestra el mensaje
-    } else {
-        estadoCampo.remove(); // Si no hay mensaje, eliminamos la barra
-    }
-}
-
-
+    $("#imagen").blur(function() {
+        validarImagen($(this));
+    });
 
     // AGREGAR O MODIFICAR UN PRODUCTO
     $('#product-form').submit(e => {
         e.preventDefault();
-        //Elimina los mensaje de las validaciones anterirores
+        //Elimina los mensaje de las validaciones anteriores
         $(".status-bar").remove();
         $('#error-message').hide();
         
@@ -179,6 +177,7 @@ function mostrarEstado(mensaje, elemento) {
             imagen: $('#imagen').val(),
             id: $('#productId').val()
         };
+
          // VALIDAR CAMPOS OBLIGATORIOS ANTES DE ENVIAR A BD
          let camposValidos = true;
          $("#name, #precio, #unidades, #modelo, #marca").each(function() {
@@ -248,8 +247,6 @@ function mostrarEstado(mensaje, elemento) {
         } 
     });
     
-    
-  
 
     // ELIMINAR PRODUCTO
     $(document).on('click', '.product-delete', function() {
@@ -281,10 +278,10 @@ function mostrarEstado(mensaje, elemento) {
             $('#marca').val(product.marca);
             $('#detalles').val(product.detalles);
             $('#imagen').val(product.imagen);
-            
-            // SE PONE LA BANDERA DE EDICIÓN EN true
+
             edit = true;
-            $('button.btn-primary').text("Modificar Producto");
+            $('button.btn-primary').text('Editar Producto');
         });
     });
+
 });
