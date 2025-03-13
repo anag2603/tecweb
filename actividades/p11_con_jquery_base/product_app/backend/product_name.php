@@ -1,22 +1,33 @@
 <?php
-include('database.php'); // Incluye la conexión a la base de datos
+include_once __DIR__.'/database.php';
 
+$data = array();
+$error = false;
+
+// Verificar que se haya recibido el nombre
 if (isset($_GET['name'])) {
-    $name = $_GET['name'];  // Obtiene el nombre del producto enviado en la solicitud GET
+    $name = $_GET['name'];
 
-    // Consulta SQL para verificar si el nombre del producto ya existe en la base de datos
-    $query = "SELECT * FROM productos WHERE nombre = ?";
-    $stmt = $conn->prepare($query);  // Prepara la consulta para evitar SQL injection
-    $stmt->bind_param('s', $name);  // Enlaza el parámetro del nombre
-    $stmt->execute();  // Ejecuta la consulta
-    $result = $stmt->get_result();  // Obtiene los resultados
+    // Usar 'name' exactamente para evitar coincidencias parciales
+    $sql = "SELECT * FROM productos WHERE nombre = '{$name}' AND eliminado = 0";
 
-    // Si ya existe un producto con ese nombre
-    if ($result->num_rows > 0) {
-        echo json_encode(["error" => "El producto con ese nombre ya existe."]);
+    if ($result = $conexion->query($sql)) {
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+        // Si existe un producto con el mismo nombre, marcar error
+        if (count($rows) > 0) {
+            $error = true;
+        }
+
+        $result->free();
     } else {
-        // Si el nombre no existe, es válido
-        echo json_encode(["success" => "Nombre válido."]);
+        die('Query Error: ' . mysqli_error($conexion));
     }
+
+    $conexion->close();
 }
+
+// Devolver JSON con el error si existe
+echo json_encode(["error" => $error], JSON_PRETTY_PRINT);
 ?>
+
