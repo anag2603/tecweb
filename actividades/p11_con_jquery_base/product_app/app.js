@@ -173,24 +173,22 @@ $(document).ready(function(){
         const element = $(this)[0].activeElement.parentElement.parentElement;
         const id = $(element).attr('productId');
         $.post('./backend/product-single.php', {id}, (response) => {
-            // SE CONVIERTE A OBJETO EL JSON OBTENIDO
             let product = JSON.parse(response);
-            // SE INSERTAN LOS DATOS ESPECIALES EN LOS CAMPOS CORRESPONDIENTES
             $('#name').val(product.nombre);
-            // EL ID SE INSERTA EN UN CAMPO OCULTO PARA USARLO DESPUÉS PARA LA ACTUALIZACIÓN
             $('#productId').val(product.id);
-            // SE ELIMINA nombre, eliminado E id PARA PODER MOSTRAR EL JSON EN EL <textarea>
             delete(product.nombre);
             delete(product.eliminado);
             delete(product.id);
-            // SE CONVIERTE EL OBJETO JSON EN STRING
             let JsonString = JSON.stringify(product,null,2);
-            // SE MUESTRA STRING EN EL <textarea>
             $('#description').val(JsonString);
             
             // SE PONE LA BANDERA DE EDICIÓN EN true
             edit = true;
+    
+            // CAMBIA EL TEXTO DEL BOTÓN A "Modificar Producto"
+            $('button.btn-primary').text("Modificar Producto");
         });
         e.preventDefault();
-    });    
+    });
+    
 });
