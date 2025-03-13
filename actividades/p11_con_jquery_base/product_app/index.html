@@ -36,6 +36,7 @@
                 <div class="form-group">
                   <label for="name">Nombre:</label>
                   <input class="form-control" type="text" id="name" placeholder="Nombre de producto" required>
+                  <span id="error-message" style="color: red; display: none;"></span>
                 </div>
 
                 <div class="form-group">
@@ -60,37 +61,27 @@
 
                 <div class="form-group">
                   <label for="detalles">Detalles:</label>
-                  <textarea class="form-control" id="detalles" rows="3" placeholder="Detalles adicionales"></textarea>
+                  <textarea class="form-control" id="detalles" placeholder="Detalles adicionales"></textarea>
                 </div>
 
                 <div class="form-group">
-                  <label for="imagen">URL de la imagen:</label>
-                  <input class="form-control" type="text" id="imagen" placeholder="URL de la imagen del producto">
+                  <label for="imagen">Imagen (URL):</label>
+                  <input class="form-control" type="text" id="imagen" placeholder="URL de la imagen">
                 </div>
 
-                <button class="btn btn-primary btn-block text-center" type="submit">
-                  Agregar Producto
-                </button>
+                <button class="btn btn-primary" type="submit">Agregar Producto</button>
               </form>
             </div>
           </div>
         </div>
-
-        <!-- TABLA  -->
         <div class="col-md-7">
-          <div class="card my-4" id="product-result">
-            <div class="card-body">
-              <!-- RESULTADO -->
-              <ul id="container"></ul>
-            </div>
-          </div>
-
-          <table class="table table-bordered table-sm">
+          <table class="table table-bordered" id="product-result">
             <thead>
               <tr>
-                <td>Id</td>
-                <td>Nombre</td>
-                <td>Descripción</td>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody id="products"></tbody>
@@ -99,10 +90,8 @@
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
-    <!-- Lógica del Frontend -->
+    <!-- SCRIPT -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

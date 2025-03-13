@@ -229,25 +229,32 @@ $(document).ready(function() {
                 type: 'GET',
                 success: function (response) {
                     const data = JSON.parse(response); 
-        
+                    
                     // Si ya existe un producto con el nombre
-                    if(data.error) {
+                    if (data.error) {
                         // Muestra un mensaje de "nombre inválido" en rojo
                         $('#name').addClass('invalid');
-                        $('#error-message').text('Nombre inválido, ya existe un producto con ese nombre')
-                            .css('color', 'red') 
+                        $('#error-message')
+                            .text('Nombre inválido, ya existe un producto con ese nombre')
+                            .css('color', 'red')
+                            .show(); // Asegurarse de que el mensaje se muestre
                     } else {
                         // Si el nombre es válido, muestra el mensaje en verde
                         $('#name').removeClass('invalid');
-                        $('#error-message').text('Nombre válido').css('color', '#72d600').show(); 
+                        $('#error-message')
+                            .text('Nombre válido')
+                            .css('color', '#72d600')
+                            .show(); // Asegurarse de que el mensaje se muestre
                     }
                 },
-
             });
-        } 
+        } else {
+            // Si no hay texto en el campo, ocultar el mensaje
+            $('#error-message').hide();
+        }
     });
     
-
+    
     // ELIMINAR PRODUCTO
     $(document).on('click', '.product-delete', function() {
         if (confirm('¿Realmente deseas eliminar el producto?')) {
@@ -285,3 +292,4 @@ $(document).ready(function() {
     });
 
 });
+
