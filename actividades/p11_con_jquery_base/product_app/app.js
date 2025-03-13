@@ -120,18 +120,18 @@ $(document).ready(function(){
 
     $('#product-form').submit(e => {
         e.preventDefault();
-
+    
         // SE CONVIERTE EL JSON DE STRING A OBJETO
-        let postData = JSON.parse( $('#description').val() );
+        let postData = JSON.parse($('#description').val());
         // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
         postData['nombre'] = $('#name').val();
         postData['id'] = $('#productId').val();
-
+    
         /**
          * AQUÍ DEBES AGREGAR LAS VALIDACIONES DE LOS DATOS EN EL JSON
          * --> EN CASO DE NO HABER ERRORES, SE ENVIAR EL PRODUCTO A AGREGAR
          **/
-
+    
         const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
         
         $.post(url, postData, (response) => {
@@ -155,8 +155,11 @@ $(document).ready(function(){
             listarProductos();
             // SE REGRESA LA BANDERA DE EDICIÓN A false
             edit = false;
+    
+            // CAMBIA EL TEXTO DEL BOTÓN A "Agregar Producto"
+            $('button.btn-primary').text("Agregar Producto");
         });
-    });
+    });    
 
     $(document).on('click', '.product-delete', (e) => {
         if(confirm('¿Realmente deseas eliminar el producto?')) {
