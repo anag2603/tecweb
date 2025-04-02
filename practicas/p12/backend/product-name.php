@@ -1,11 +1,11 @@
 <?php
     use TECWEB\MYAPI\Products as Products;
     require_once __DIR__ . '/myapi/Products.php';
-    
-    $search = $_GET['search'] ?? null;
-    
+
+    $name = $_POST['nombre'] ?? null;
+
     $prodObj = new Products('marketzone');
-    $prodObj->search($search);
-    
+    $prodObj->name($name);
+
     echo $prodObj->getData();
 ?>
