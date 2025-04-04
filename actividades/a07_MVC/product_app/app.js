@@ -2,9 +2,9 @@
 var baseJSON = {
     "precio": 0.0,
     "unidades": 1,
-    "modelo": "XX-000",
-    "marca": "NA",
-    "detalles": "NA",
+    "modelo": "ANN_00",
+    "marca": "NN",
+    "detalles": "NN",
     "imagen": "img/default.png"
   };
 
@@ -13,9 +13,9 @@ $(document).ready(function(){
 
     $('#precio').val("0.0");
     $('#unidades').val("1");
-    $('#modelo').val("XX-000");
-    $('#marca').val("NA");
-    $('#detalles').val("NA");
+    $('#modelo').val("ANN_00");
+    $('#marca').val("NN");
+    $('#detalles').val("NN");
     $('#imagen').val("img/default.png");
 
     $('#product-result').hide();
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
     function listarProductos() {
         $.ajax({
-            url: './backend/product-list.php',
+            url: './backend/View/router.php?action=list',
             type: 'GET',
             success: function(response) {
                 // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
@@ -71,7 +71,7 @@ $(document).ready(function(){
         if($('#search').val()) {
             let search = $('#search').val();
             $.ajax({
-                url: './backend/product-search.php?search='+$('#search').val(),
+                url: './backend/View/router.php?action=search&search='+$('#search').val(),
                 data: {search},
                 type: 'GET',
                 success: function (response) {
@@ -139,7 +139,7 @@ $(document).ready(function(){
             }
         
             if (!product.marca || product.marca > 25) {
-                alert("Debe seleccionar una marca.");
+                alert("Marca obligatoria");
                 return false;
             }
         
@@ -180,7 +180,7 @@ $(document).ready(function(){
             return;
         }
 
-        const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
+        const url = edit === false ? './backend/View/router.php?action=add' : './backend/View/router.php?action=edit';
         
         $.post(url, postData, (response) => {
             //console.log(response);
@@ -213,7 +213,7 @@ $(document).ready(function(){
         if(confirm('¿Realmente deseas eliminar el producto?')) {
             const element = $(this)[0].activeElement.parentElement.parentElement;
             const id = $(element).attr('productId');
-            $.post('./backend/product-delete.php', {id}, (response) => {
+            $.post('./backend/View/router.php?action=delete', {id}, (response) => {
                 const respuesta = typeof response === "string" ? JSON.parse(response) : response;
                 const template_bar = `
                     <li style="list-style: none;">status: ${respuesta.status}</li>
@@ -230,7 +230,7 @@ $(document).ready(function(){
         $('button.btn-primary').text("Modificar Producto");
         const element = $(this)[0].activeElement.parentElement.parentElement;
         const id = $(element).attr('productId');
-        $.post('./backend/product-single.php', {id}, (response) => {
+        $.post('./backend/View/router.php?action=single', {id}, (response) => {
             // SE CONVIERTE A OBJETO EL JSON OBTENIDO
             let product = JSON.parse(response);
             // SE INSERTAN LOS DATOS ESPECIALES EN LOS CAMPOS CORRESPONDIENTES
@@ -249,13 +249,11 @@ $(document).ready(function(){
     });
     
     function actualizarEstado(mensaje, esValido) {
-        let icono = esValido ? '✅' : '❌';
-        let clase = esValido ? 'estado-ok' : 'estado-error';
-        let template_bar = `<li style="list-style: none;" class="${clase}">${icono} ${mensaje}</li>`;
+        let clase = esValido ? 'valid' : 'invalid';
+        let template_bar = `<li style="list-style: none;" class="${clase}">${mensaje}</li>`;
         $('#product-result').show();
         $('#container').html(template_bar);
     }
-    
     
     $('#name, #marca, #modelo, #precio, #detalles, #unidades').on('input', function () {
         let id = $(this).attr('id');
@@ -271,7 +269,7 @@ $(document).ready(function(){
                     esValido = false;
                 } else {
                     $.ajax({
-                        url: './backend/product-name.php',
+                        url: './backend/View/router.php?action=name',
                         method: 'POST',
                         data: { nombre: valor },
                         dataType: 'json',
@@ -295,6 +293,14 @@ $(document).ready(function(){
                     return;  
                 }
                 break;
+            case 'marca':
+                if (valor === '') {
+                    mensaje = 'Escriba una';
+                    esValido = false;
+                } else {
+                    mensaje = 'Marca válida.';
+                }
+                break;
             case 'modelo':
                 if (valor === '' || valor.length > 25 || !/^[a-zA-Z0-9]*$/.test(valor)) {
                     mensaje = 'El modelo debe ser alfanumérico y tener máximo 25 caracteres.';
@@ -313,20 +319,12 @@ $(document).ready(function(){
                 break;
             case 'detalles':
                 if (valor.length > 250) {
-                    mensaje = 'Los detalles son opcionales y con un máximo de 250 caracteres.';
+                    mensaje = 'Los detalles deben tener máximo 250 caracteres.';
                     esValido = false;
                 } else {
                     mensaje = 'Detalles válidos.';
                 }
                 break;
-            case 'marca':
-                if (valor.trim() === '') {
-                    mensaje = 'La marca es obligatoria.';
-                    esValido = false;
-                } else {
-                        mensaje = 'Marca válida.';
-                }
-                break;                
             case 'unidades':
                 if (isNaN(parseInt(valor)) || parseInt(valor) < 0) {
                     mensaje = 'Las unidades deben ser 0 o más.';
