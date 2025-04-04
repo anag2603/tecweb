@@ -2,9 +2,9 @@
 var baseJSON = {
     "precio": 0.0,
     "unidades": 1,
-    "modelo": "XX-000",
-    "marca": "NA",
-    "detalles": "NA",
+    "modelo": "ANN_00",
+    "marca": "NN",
+    "detalles": "NN",
     "imagen": "img/default.png"
   };
 
@@ -13,9 +13,9 @@ $(document).ready(function(){
 
     $('#precio').val("0.0");
     $('#unidades').val("1");
-    $('#modelo').val("XX-000");
-    $('#marca').val("NA");
-    $('#detalles').val("NA");
+    $('#modelo').val("ANN_00");
+    $('#marca').val("NN");
+    $('#detalles').val("NN");
     $('#imagen').val("img/default.png");
 
     $('#product-result').hide();
@@ -139,7 +139,7 @@ $(document).ready(function(){
             }
         
             if (!product.marca || product.marca > 25) {
-                alert("Debe seleccionar una marca.");
+                alert("Debe escribir una marca.");
                 return false;
             }
         
@@ -275,16 +275,16 @@ $(document).ready(function(){
                         dataType: 'json',
                         success: function (data) {
                             if (data.existe) {
-                                mensaje = 'El nombre del producto ya existe en la base de datos :c';
+                                mensaje = 'El nombre del producto ya existe en la base de datos';
                                 esValido = false;
                             } else {
-                                mensaje = 'Nombre válido =D';
+                                mensaje = 'Nombre válido';
                                 esValido = true;
                             }
                             actualizarEstado(mensaje, esValido);  
                         },
                         error: function (xhr, status, error) {
-                            console.error('Error al verificar el nombre D:', error);
+                            console.error('Error al verificar el nombre', error);
                             mensaje = 'Hubo un error al verificar el nombre.';
                             esValido = false;
                             actualizarEstado(mensaje, esValido);  

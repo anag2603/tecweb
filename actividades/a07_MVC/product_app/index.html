@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>ProductApp</title>
+    <!-- BOOTSTRAP 4  -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
+
+    <!--Estilo personalizado con paleta morado-rosada y validaciones sobre inputs -->
+    <style>
+      body {
+        background-color: #fdfbff;
+      }
+
+      .navbar {
+        background-color: #6a0dad !important;
+      }
+
+      .navbar .navbar-brand {
+        color: #ffffff !important;
+        font-weight: bold;
+      }
+
+      .navbar .form-control {
+        border-color: #e6e6fa;
+      }
+
+      .navbar .btn {
+        background-color: #ff4d88;
+        color: white;
+        border: none;
+      }
+
+      .navbar .btn:hover {
+        background-color: #e04378;
+      }
+
+      .card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #e6e6fa;
+        box-shadow: 0 4px 12px rgba(106, 13, 173, 0.1);
+      }
+
+      .btn-primary {
+        background-color: #f7c6d9;
+        border-color: #f7c6d9;
+        color: #6a0dad;
+        font-weight: bold;
+      }
+
+      .btn-primary:hover {
+        background-color: #f4b1c9;
+        border-color: #f4b1c9;
+      }
+
+      .btn-danger {
+        background-color: #ff4d88;
+        border-color: #ff4d88;
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background-color: #e04378;
+        border-color: #e04378;
+      }
+
+      .btn-success {
+        background-color: #c084fc;
+        border-color: #c084fc;
+        color: white;
+      }
+
+      .btn-success:hover {
+        background-color: #a566df;
+        border-color: #a566df;
+      }
+
+      .form-group {
+        position: relative;
+      }
+
+      .input-feedback {
+        position: absolute;
+        top: -26px;
+        left: 10px;
+        font-size: 0.85rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 500;
+        white-space: nowrap;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        z-index: 10;
+      }
+
+      .input-feedback.valid {
+        background-color: #e6f9ed;
+        color: #2e7d32;
+        border: 1px solid #b2dfdb;
+      }
+
+      .input-feedback.invalid {
+        background-color: #fde2e4;
+        color: #c62828;
+        border: 1px solid #f8bbd0;
+      }
+
+      .input-feedback.valid::before {
+        content: "\2714 ";
+        font-weight: bold;
+      }
+
+      .input-feedback.invalid::before {
+        content: "\2716 ";
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href=".">ProductApp</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto"></ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="ID, marca o descripción">
+          <button class="btn btn-success my-2 my-sm-0" type="button">Buscar</button>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row p-4">
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
+              <form id="product-form">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="number" id="precio" placeholder="Precio del producto" step="0.01">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="number" id="unidades" placeholder="Número de unidades" min="1">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" id="modelo" placeholder="Modelo">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" id="marca" placeholder="Marca">
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" id="detalles" rows="3" placeholder="Detalles del producto"></textarea>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" id="imagen" placeholder="URL de la imagen">
+                </div>
+                <input type="hidden" id="productId">
+                <button class="btn btn-primary btn-block text-center" type="submit">
+                  Agregar Producto
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLA -->
+        <div class="col-md-7">
+          <div class="card my-4" id="product-result">
+            <div class="card-body">
+              <ul id="container"></ul>
+            </div>
+          </div>
+
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>Nombre</td>
+                <td>Descripción</td>
+              </tr>
+            </thead>
+            <tbody id="products"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
