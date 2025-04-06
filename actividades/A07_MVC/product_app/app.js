@@ -196,9 +196,9 @@ $(document).ready(function(){
             $('#name').val('');
             $('#precio').val("0.0");
             $('#unidades').val("1");
-            $('#modelo').val("XX-000");
-            $('#marca').val("NA");
-            $('#detalles').val("NA");
+            $('#modelo').val("ANN_00");
+            $('#marca').val("NN");
+            $('#detalles').val("NN");
             $('#imagen').val("img/default.png");
             $('#product-result').show();
             $('#container').html(template_bar);
@@ -278,7 +278,7 @@ $(document).ready(function(){
                                 mensaje = 'El nombre del producto ya existe en la base de datos';
                                 esValido = false;
                             } else {
-                                mensaje = 'Nombre válido =D';
+                                mensaje = 'Nombre válido';
                                 esValido = true;
                             }
                             actualizarEstado(mensaje, esValido);  
