@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<CatalogoVOD>
+  <cuenta>
+    <correo>gf202326818@alm.buap.mx</correo>
+    <perfiles>
+      <perfil>
+        <usuario>Ana Flores</usuario>
+        <idioma>Ingles</idioma>
+      </perfil>
+      <perfil>
+        <usuario>Arturo Flores</usuario>
+        <idioma>Ingles</idioma>
+      </perfil>
+    </perfiles>
+  </cuenta>
+  <contenido>
+    <peliculas>
+      <genero>
+        <nombre>Ciencia_Ficcion</nombre>
+        <titulo>
+          <nombre>Titanes del pacifico</nombre>
+          <duracion>120</duracion>
+        </titulo>
+        <titulo>
+          <nombre>Lucy</nombre>
+          <duracion>120</duracion>
+        </titulo>
+        <titulo>
+          <nombre>Avatar</nombre>
+          <duracion>210</duracion>
+        </titulo>
+        <titulo>
+          <nombre>Corre</nombre>
+          <duracion>110</duracion>
+        </titulo>
+      </genero>
+      <genero>
+        <nombre>Terror</nombre>
+        <titulo>
+          <nombre>La noche del demonio 1</nombre>
+          <duracion>120</duracion>
+        </titulo>
+        <titulo>
+          <nombre>Silencio</nombre>
+          <duracion>100</duracion>
+        </titulo>
+        <titulo>
+          <nombre>Cadaver</nombre>
+          <duracion>110</duracion>
+        </titulo>
+        <titulo>
+          <nombre>Anabelle 1</nombre>
+          <duracion>120</duracion>
+        </titulo>
+      </genero>
+    </peliculas>
+    <programas>
+      <genero>
+        <nombre>Comedia</nombre>
+        <titulo>
+          <nombre>Malcom</nombre>
+          <duracion>60</duracion>
+        </titulo>
+        <titulo>
+          <nombre>ejem2</nombre>
+          <duracion>35</duracion>
+        </titulo>
+        <titulo>
+          <nombre>ejem3</nombre>
+          <duracion>40</duracion>
+        </titulo>
+        <titulo>
+          <nombre>ejem4</nombre>
+          <duracion>45</duracion>
+        </titulo>
+      </genero>
+      <genero>
+        <nombre>Amor</nombre>
+        <titulo>
+          <nombre>El barco</nombre>
+          <duracion>90</duracion>
+        </titulo>
+        <titulo>
+          <nombre>ejem2</nombre>
+          <duracion>35</duracion>
+        </titulo>
+        <titulo>
+          <nombre>ejem3</nombre>
+          <duracion>40</duracion>
+        </titulo>
+        <titulo>
+          <nombre>ejem4</nombre>
+          <duracion>45</duracion>
+        </titulo>
+      </genero>
+    </programas>
+  </contenido>
+</CatalogoVOD>
