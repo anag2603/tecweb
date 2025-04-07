@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<CatalogoVOD>
+  <cuenta correo="gf202326818@alm.buap.mx">
+    <perfiles>
+      <perfil usuario="Ana Flores" idioma="Ingles"/>
+      <perfil usuario="Arturo Vazquez" idioma="Ingles"/>
+    </perfiles>
+  </cuenta>
+  <contenido>
+    <peliculas>
+      <genero nombre="Ciencia_Ficcion">
+        <titulo nombre="Titanes del pacifico" duracion="120"/>
+        <titulo nombre="Lucy" duracion="120"/>
+        <titulo nombre="Avatar" duracion="210"/>
+        <titulo nombre="Corre" duracion="110"/>
+      </genero>
+      <genero nombre="Terror">
+        <titulo nombre="La noche del demonio 1" duracion="120"/>
+        <titulo nombre="Silencio" duracion="100"/>
+        <titulo nombre="Cadaver" duracion="110"/>
+        <titulo nombre="Anabelle 1" duracion="120"/>
+      </genero>
+    </peliculas>
+    <programas>
+      <genero nombre="Comedia">
+        <titulo nombre="Malcom" duracion="60"/>
+        <titulo nombre="ejem2" duracion="35"/>
+        <titulo nombre="ejem3" duracion="40"/>
+        <titulo nombre="ejem4" duracion="45"/>
+      </genero>
+      <genero nombre="Amor">
+        <titulo nombre="El barco" duracion="90"/>
+        <titulo nombre="ejem2" duracion="35"/>
+        <titulo nombre="ejem3" duracion="40"/>
+        <titulo nombre="ejem4" duracion="45"/>
+      </genero>
+    </programas>
+  </contenido>
+</CatalogoVOD>
