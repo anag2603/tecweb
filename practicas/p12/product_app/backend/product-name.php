@@ -1,6 +1,6 @@
 <?php
 use TECWEB\MYAPI\Products;
-require_once __DIR__ . '/myapi/Products.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $producto = new Products("marketzone", "root", "Cande02022004");
 
